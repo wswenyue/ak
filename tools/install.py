@@ -10,8 +10,7 @@ import shutil
 import subprocess
 import sys
 import zipfile
-from urllib import request
-
+import urllib2
 import requests
 
 
@@ -44,7 +43,7 @@ class AkInstaller(object):
     def get_remote_config(self):
         if self._config is None:
             url = "https://raw.githubusercontent.com/wswenyue/ak/install/config"
-            data = request.urlopen(url).read().decode('utf8')
+            data = urllib2.urlopen(url).read().decode('utf8')
             self._config = json.loads(data)
         return self._config
 
