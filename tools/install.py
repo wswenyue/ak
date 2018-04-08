@@ -4,11 +4,13 @@
 
 
 import io
+import json
 import os
 import shutil
 import subprocess
 import sys
 import zipfile
+from urllib import request
 
 import requests
 
@@ -41,8 +43,6 @@ class AkInstaller(object):
 
     def get_remote_config(self):
         if self._config is None:
-            from urllib import request
-            import json
             url = "https://raw.githubusercontent.com/wswenyue/ak/install/config"
             data = request.urlopen(url).read().decode('utf8')
             self._config = json.loads(data)
@@ -117,10 +117,13 @@ def main(orig_args):
     else:
         print("install ak")
         url = ak.get_target_url()
+        print("get target url")
         ak.download_extract_zip(url, ak_path)
+        print("extract zip file")
         ak_script = os.path.join(ak_path, 'ak')
         ak.link_ak_script(ak_script)
         ak.set_ak_script_exe(ak_script)
+        print("link ak")
     print("over !!!")
 
 
