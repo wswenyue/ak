@@ -1,5 +1,5 @@
 {
-    "version": 1,
-    "target" :"www.baiud.com"
-
+    "version_main": 0,
+    "version_minor": 1,
+    "target" :"https://github.com/wswenyue/ak/archive/test_0.1.zip"
 }
