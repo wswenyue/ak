@@ -15,8 +15,7 @@ import requests
 
 class AkInstaller(object):
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self):
         self._config = None
 
     @staticmethod
