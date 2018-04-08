@@ -103,15 +103,26 @@ class AkInstaller(object):
             print(e)
             raise e
 
+    @staticmethod
+    def delete_ak(ak_home):
+        AkInstaller.remove_file(ak_home)
+        AkInstaller.remove_file("/usr/local/bin/ak")
+
 
 def main(orig_args):
     ak = AkInstaller()
     ak_path = ak.build_ak_home()
-    url = ak.get_target_url()
-    ak.download_extract_zip(url, ak_path)
-    ak_script = os.path.join(ak_path, 'ak')
-    ak.link_ak_script(ak_script)
-    ak.set_ak_script_exe(ak_script)
+    if ("uninstall" in orig_args) or ("delete" in orig_args):
+        print("uninstall ak begin")
+        ak.delete_ak(ak_path)
+    else:
+        print("install ak")
+        url = ak.get_target_url()
+        ak.download_extract_zip(url, ak_path)
+        ak_script = os.path.join(ak_path, 'ak')
+        ak.link_ak_script(ak_script)
+        ak.set_ak_script_exe(ak_script)
+    print("over !!!")
 
 
 if __name__ == '__main__':
