@@ -2,16 +2,17 @@
 # -*- coding: utf-8 -*-
 # Created by wswenyue on 2018/4/8.
 
+import json
+import urllib2
+
 
 class Config(object):
     @staticmethod
     def get_remote_config():
         if not hasattr(Config, '_config'):
             print("config empty")
-            from urllib import request
-            import json
             url = "https://raw.githubusercontent.com/wswenyue/ak/install/config"
-            data = request.urlopen(url).read().decode('utf8')
+            data = urllib2.urlopen(url).read().decode('utf8')
             Config._config = json.loads(data)
         else:
             print("config not empty")
